@@ -12,3 +12,11 @@ class Items(Base):
     quantity = Column(Integer)
     description = Column(String(256))
     date_added = Column(DateTime())
+    
+    #def _init_(self,name,quantity,description):
+       #self.name = name
+       #self.quantity=quantity
+       #self.description=description
+   
+    #def _repr_(self):
+       #return '<User %r>'%(self.name)

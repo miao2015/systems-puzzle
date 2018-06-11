@@ -16,6 +16,7 @@ def add_item():
         item = Items(name=form.name.data, quantity=form.quantity.data, description=form.description.data, date_added=datetime.datetime.now())
         db_session.add(item)
         db_session.commit()
+        
         return redirect(url_for('success'))
     return render_template('index.html', form=form)
 
@@ -23,11 +24,19 @@ def add_item():
 def success():
     results = []
  
-    qry = db_session.query(Items)
-    results = qry.all()
-
+   
+    #qry=db_session.query(Items).all()
+    qry=Items.query.all() 
+    
+    
+    #results=qry.all()
+    for item in qry:
+        results.append(item.name+' '+str(item.quantity)+' '+item.description+' '+str(item.date_added))
+        #db_session.delete(user)
     return str(results)
-  
+    
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    #db_session.create_all()
+    app.run(host='0.0.0.0',port=5090, debug=True)
+    
